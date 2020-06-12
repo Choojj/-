@@ -67,12 +67,26 @@
                                                                             ---     ---
 999
 
-dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1] dp[자리수][마지막자리수]
 계단수이려면 뒷자리를 빼도 계단수여야함
+dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1] dp[자리수][마지막자리수]
 """
 
 import sys
 
 N = int(sys.stdin.readline())
 
-print(N)
+stair_num = [[0 for _ in range(10)] for _ in range(100)]
+
+for i in range(100):
+    for j in range(10):
+        if (i == 0 and j != 0):
+            stair_num[i][j] = 1
+        else:
+            if (j == 0):
+                stair_num[i][j] = stair_num[i - 1][j + 1]
+            elif (j == 9):
+                stair_num[i][j] = stair_num[i - 1][j - 1]
+            else:
+                stair_num[i][j] = (stair_num[i - 1][j - 1] + stair_num[i - 1][j + 1])
+
+print(sum(stair_num[N - 1]) % 1000000000)
