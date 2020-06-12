@@ -73,5 +73,6 @@ dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1] dp[자리수][마지막자리수]
 
 import sys
 
-for i in range(100, 1000):
-    print(i, end = " ")
+N = int(sys.stdin.readline())
+
+print(N)
