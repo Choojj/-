@@ -41,6 +41,20 @@ dp[4] = 3 5, 3 4 5, 2 5, 2 4 5
 9
 10 20 40 25 20 50 30 70 85
 10 20 25 30 70 85
+
+10 20 40 25 20 50 30 70 85
+10
+10 20
+10 20
+10 20 25
+10 20 25
+10 20 25 50
+10 20 25 30
+10 20 25 30 70
+10 20 25 30 70 85
+
+7
+8 9 10 1 2 3 4
 """
 
 # import sys
@@ -70,23 +84,40 @@ dp[4] = 3 5, 3 4 5, 2 5, 2 4 5
 
 # print(length_subseq)
 
+# import sys
+
+# N = int(sys.stdin.readline())
+
+# num_list = list(map(int, sys.stdin.readline().split()))
+
+# vector = [0]
+# vector_length = 0
+# for i in range(N):
+#     if (i == 0):
+#         vector.append(num_list[i])
+#         vector_length += 1
+#     else:
+#         if (vector[-1] < num_list[i]):
+#             vector.append(num_list[i])
+#             vector_length += 1
+#         elif (vector[-2] < num_list[i] < num_list[-1]):
+#             vector[vector_length] = num_list[i]
+#     print(vector)
+
+# print(vector_length, vector)
+
 import sys
 
 N = int(sys.stdin.readline())
 
 num_list = list(map(int, sys.stdin.readline().split()))
 
-vector = [0]
-vector_length = 0
-for i in range(N):
-    if (i == 0):
-        vector.append(num_list[i])
-        vector_length += 1
-    else:
-        if (vector[-1] < num_list[i]):
-            vector.append(num_list[i])
-            vector_length += 1
-        elif (vector[-2] < num_list[i] < num_list[-1]):
-            vector[vector_length] = num_list[i]
+vector = [0] * N
 
-print(len(vector) - 1)
+for i in range(N):
+    for j in range(i):
+        if (num_list[i] > num_list[i - j]):
+            vector[i] = max(vector[i - j], vector[i])
+            print(vector[i])
+    vector[i] += 1
+    print(vector)
