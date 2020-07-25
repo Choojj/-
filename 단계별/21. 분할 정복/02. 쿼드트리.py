@@ -2,11 +2,9 @@ import sys
 
 N = int(sys.stdin.readline())
 
-colored_paper = []
+image = []
 for _ in range(N):
-    for _ in range(N):
-        colored_paper.append(sys.stdin.
-
+    image.append(list(map(int, sys.stdin.readline().rstrip())))
 
 
 def Div_Con(x, y, num):
@@ -16,12 +14,14 @@ def Div_Con(x, y, num):
             break
 
         for j in range(y, y + num):
-            if (colored_paper[x][y] != colored_paper[i][j]):
+            if (image[x][y] != image[i][j]):
                 # x, x + num / y, y + num
+                print("(", end = "")
                 Div_Con(x, y, num // 2) # 0 4, 0 4
                 Div_Con(x, y + num // 2, num // 2) # 0 4, 4 8
                 Div_Con(x + num // 2, y, num // 2) # 4 8, 0 4
                 Div_Con(x + num // 2, y + num // 2, num // 2) # 4 8, 4 8
+                print(")", end = "")
                 break_tirg = True
                 break
     
@@ -29,8 +29,8 @@ def Div_Con(x, y, num):
         # print("분할", x, x + num , y, y + num, num)
         # for k in range(x, x + num):
         #     for l in range(y, y + num):
-        #         print(colored_paper[k][l], end = " ")
+        #         print(image[k][l], end = " ")
         #     print()
-        pass
+        print(image[x][y], end = "")
 
-# Div_Con(0, 0, N)
+Div_Con(0, 0, N)
