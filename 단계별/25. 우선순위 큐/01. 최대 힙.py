@@ -85,7 +85,27 @@ for _ in range(N):
             # 큰지 작은지 비교하기전에 비교할게 있는지 먼저 검사할것
             # 0부터 시작할때 언제 끝내야 할까?
             # 트리 섹터의 마지막 i는 항상 2의 배수 -> len(heap) <= 2 ** (lower + 1) 이런식
+            # lower 2개 모두 자신보다 작을때
 
+            i = lower  = count = 0
+            while (len(heap) >= 2 ** (count + 1)):
+                trig = False
+                if (i * 2 + 1 <= len(heap) - 1 and heap[i] < heap[i * 2 + 1]):
+                    lower = i * 2 + 1
+                if (i * 2 + 2 <= len(heap) - 1 and heap[i] < heap[i * 2 + 2]):
+                    lower = i * 2 + 2
+                    trig = True
+                
+                if (trig and heap[i * 2 + 1] >= heap[i * 2 + 2]):
+                    lower = i * 2 + 1
+                elif (trig and heap[i * 2 + 1] < heap[i * 2 + 2]):
+                    lower = i * 2 + 2
+
+                heap[i], heap[lower] = heap[lower], heap[i]
+                # print(i, lower, heap, count)
+
+                i = lower
+                count += 1
             pass
         else:
             print(0)
@@ -103,3 +123,5 @@ for _ in range(N):
                 break
 
         pass
+
+    # print(heap, "----")
